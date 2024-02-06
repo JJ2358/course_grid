@@ -54,3 +54,20 @@ export async function createNewUser(formState: { message: string | null }, formD
     }
 
 }
+
+export async function loginUser(formState: { message: string | null }, formData: FormData) {
+    //Steps
+
+    //get user and password from the FORM and sanitize them
+
+    //connect to the DB
+
+    //try block with functionality
+
+    //since the user is the _id, we will need to check if password from associated user in the DB matches the one provided in the form
+
+    //if matches: redirect to user's homepage
+
+    //if it doesn't match, show a message of invalid user or password
+
+}
