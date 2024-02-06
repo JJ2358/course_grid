@@ -55,19 +55,39 @@ export async function createNewUser(formState: { message: string | null }, formD
 
 }
 
-export async function loginUser(formState: { message: string | null }, formData: FormData) {
+export async function loginUser(formState: { emailMessage?: string, passMessage?: string, feedback?: string }, formData: FormData) {
     //Steps
 
-    //get user and password from the FORM and sanitize them
+    //get user and password from the FORM
 
-    //connect to the DB
+    let email: any = formData.get('email');
+    let password: any = formData.get('password');
 
-    //try block with functionality
+    //validate if inputs are valid
 
-    //since the user is the _id, we will need to check if password from associated user in the DB matches the one provided in the form
+    // provide messages if not true
+    if ((typeof email !== 'string' || email.length == 0) && (typeof password !== 'string' || password.length == 0)) {
 
-    //if matches: redirect to user's homepage
+        return { emailMessage: "Email field can't be empty", passMessage: "Password field can't be empty" };
+    } else if (typeof email !== 'string' || email.length == 0) {
+        return { emailMessage: "Email field can't be empty" };
+    } else if (typeof password !== 'string' || password.length == 0) {
+        return { emailMessage: " field can't be empty" };
+    } else {
 
-    //if it doesn't match, show a message of invalid user or password
+        // both email and passwords are valid in terms of datatype and length
+
+        //sanitize if true
+
+        //connect to the DB
+
+        //try block with functionality
+
+        //since the user is the _id, we will need to check if password from associated user in the DB matches the one provided in the form
+
+        //if matches: redirect to user's homepage
+
+        //if it doesn't match, show a message of invalid user or password
+    }
 
 }
