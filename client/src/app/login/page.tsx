@@ -1,15 +1,10 @@
-'use client';
-
 import { useFormState } from 'react-dom';
-import { hashUserPassword } from '@/tools/actions';
 
 import Link from "next/link";
 
 
 
 export default function LoginPage() {
-
-    const [formSate, action] = useFormState(hashUserPassword, { message: '' });
 
     return (
         <div className="h-screen">
