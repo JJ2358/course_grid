@@ -7,6 +7,7 @@ import sanitizeHtml from 'sanitize-html';
 import { redirect } from "next/navigation";
 
 import { hashPasswordBack } from "./DataManager";
+import { error } from "console";
 
 // MongoDB constants
 const MONGO_URL: string = "mongodb://mongo:27017/";
@@ -109,10 +110,12 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
 
 
 
-        } catch {
+        } catch (error: any) {
+            console.error();
+            throw error;
 
         } finally {
-            mongoClient.close();
+            await mongoClient.close();
         }
 
 
