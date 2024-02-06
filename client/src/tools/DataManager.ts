@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import sanitizeHtml from 'sanitize-html';
 import bcrypt from 'bcrypt';
 import bcryptjs from 'bcryptjs';
+import { redirect } from "next/navigation";
 
 // MongoDB constants
 const MONGO_URL: string = "mongodb://mongo:27017/";
@@ -47,30 +48,39 @@ export async function createAccount(request: NextApiRequest, response: NextApiRe
         await mongoClient.connect();
 
         // sanitizing input
-        request.body.username = sanitizeHtml(request.body.username);
+        request.body.firstName = sanitizeHtml(request.body.firstName);
+        request.body.lastName = sanitizeHtml(request.body.lastName);
         request.body.password = sanitizeHtml(request.body.password);
         request.body.email = sanitizeHtml(request.body.email);
         // Process accounts
         let accountsCollection = mongoClient.db(MONGO_DB_NAME).collection<Accounts>(MONGO_COLLECTION_ACCOUNT);
+
         for (const account of request.body.accounts) {
-            let sanitizedUsername = sanitizeHtml(account.username);
+            let sanitizedFirstName = sanitizeHtml(account.firstName);
+            let sanitizedLastName = sanitizeHtml(account.lastName);
             let sanitizedPassword = await hashPasswordBack(account.password); // Hash the password here
             let sanitizedEmail = sanitizeHtml(account.email);
-            let existingEmail = await accountsCollection.findOne({ email: sanitizedEmail });
+            let existingEmail = await accountsCollection.findOne({ _id: sanitizedEmail });
 
             if (!existingEmail) {
                 await accountsCollection.insertOne({
-                    username: sanitizedUsername,
+                    _id: sanitizedEmail,
+                    firstName: sanitizedFirstName,
+                    lastName: sanitizedLastName,
                     password: sanitizedPassword,
-                    email: sanitizedEmail
                 });
             }
         }
         // insert new document into DB
         let result: InsertOneResult = await mongoClient.db(MONGO_DB_NAME).collection(MONGO_COLLECTION_ACCOUNT).insertOne(request.body);
 
+        response.status(200);
+        response.send(result);
+
+        redirect('/');
+
     } catch (error: any) {
-        console.error()
+        console.error();
         throw error;
     } finally {
         await mongoClient.close();
