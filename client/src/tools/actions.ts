@@ -81,7 +81,7 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
         let validPass: string = sanitizeHtml(password);
 
         //connect to the DB
-
+        let mongoClient: MongoClient = new MongoClient(MONGO_URL);
         //try block with functionality
 
         //since the user is the _id, we will need to check if password from associated user in the DB matches the one provided in the form
