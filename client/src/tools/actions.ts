@@ -118,10 +118,6 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
             await mongoClient.close();
         }
 
-
-        //if matches: redirect to user's homepage
-
-        //if it doesn't match, show a message of invalid user or password
     }
 
 }
