@@ -1,8 +1,8 @@
 
 export interface Accounts {
-    _id?: string;
-    username: string;
+    _id: string;
+    firstName: string;
+    lastName: string;
     password: string;
-    email: string;
     createdAt?: Date;
 }
