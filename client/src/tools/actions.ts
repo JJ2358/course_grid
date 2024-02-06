@@ -84,7 +84,28 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
         let mongoClient: MongoClient = new MongoClient(MONGO_URL);
         //try block with functionality
 
-        //since the user is the _id, we will need to check if password from associated user in the DB matches the one provided in the form
+        try {
+            await mongoClient.connect();
+
+            const accountsCollection = mongoClient.db(MONGO_DB_NAME).collection<Accounts>(MONGO_COLLECTION_ACCOUNT);
+
+            //since the user is the _id, we will need to check if password from associated user in the DB matches the one provided in the form
+
+            const account = await accountsCollection.findOne({ validEmail })
+
+            if (!account) {
+                return { feedback: "Account doesn't exist" }
+            }
+
+
+
+
+        } catch {
+
+        } finally {
+            mongoClient.close();
+        }
+
 
         //if matches: redirect to user's homepage
 
