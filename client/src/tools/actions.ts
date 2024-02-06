@@ -74,10 +74,11 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
     } else if (typeof password !== 'string' || password.length == 0) {
         return { emailMessage: " field can't be empty" };
     } else {
-
         // both email and passwords are valid in terms of datatype and length
-
         //sanitize if true
+
+        let validEmail: string = sanitizeHtml(email);
+        let validPass: string = sanitizeHtml(password);
 
         //connect to the DB
 
