@@ -93,10 +93,19 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
 
             const account = await accountsCollection.findOne({ validEmail })
 
+            //feedback if account doesn't exist
+
             if (!account) {
-                return { feedback: "Account doesn't exist" }
+                return { feedback: "Your account doesn't exist" }
             }
 
+            //if password in DB matches provided password, then redirect to user's homepage
+
+            if (account.password === validPass) {
+                redirect('/home');
+            } else {
+                return { feedback: "Invalid user or password" }
+            }
 
 
 
