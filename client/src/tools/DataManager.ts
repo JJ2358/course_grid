@@ -1,8 +1,9 @@
-import { Hash } from "crypto";
 import { Accounts } from "./data.model";
 import { Collection, InsertOneResult, MongoClient } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import sanitizeHtml from 'sanitize-html';
+import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 
 // MongoDB constants
 const MONGO_URL: string = "mongodb://mongo:27017/";
@@ -12,13 +13,24 @@ const MONGO_COLLECTION_ACCOUNT: string = "accounts";
 // const MONGODB_URI="mongodb+srv://jamesmcdonald661:<password>@dbgrids.sdwqm9l.mongodb.net/?retryWrites=true&w=majority"
 
 // Salt & Hash const's
-const bcrypt = require('bcrypt');
+
 const saltRounds = 10; // The cost factor controls how much time is needed to calculate a single BCrypt hash.
 
-export async function hashPassword(password: string) {
+export async function hashPasswordBack(password: string) {
     try {
         const salt = await bcrypt.genSalt(saltRounds);
         const hash = await bcrypt.hash(password, salt);
+        return hash;
+    } catch (error) {
+        throw new Error('Hashing failed');
+    }
+}
+
+
+export async function hashPasswordFront(password: string) {
+    try {
+        const salt = await bcryptjs.genSalt(saltRounds);
+        const hash = await bcryptjs.hash(password, salt);
         return hash;
     } catch (error) {
         throw new Error('Hashing failed');
@@ -42,7 +54,7 @@ export async function createAccount(request: NextApiRequest, response: NextApiRe
         let accountsCollection = mongoClient.db(MONGO_DB_NAME).collection<Accounts>(MONGO_COLLECTION_ACCOUNT);
         for (const account of request.body.accounts) {
             let sanitizedUsername = sanitizeHtml(account.username);
-            let sanitizedPassword = await hashPassword(account.password); // Hash the password here
+            let sanitizedPassword = await hashPasswordBack(account.password); // Hash the password here
             let sanitizedEmail = sanitizeHtml(account.email);
             let existingEmail = await accountsCollection.findOne({ email: sanitizedEmail });
 
