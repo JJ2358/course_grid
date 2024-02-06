@@ -73,7 +73,7 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
     } else if (typeof email !== 'string' || email.length == 0) {
         return { emailMessage: "Email field can't be empty" };
     } else if (typeof password !== 'string' || password.length == 0) {
-        return { emailMessage: " field can't be empty" };
+        return { passMessage: " Password field can't be empty" };
     } else {
         // both email and passwords are valid in terms of datatype and length
         //sanitize if true
@@ -92,7 +92,9 @@ export async function loginUser(formState: { emailMessage?: string, passMessage?
 
             //since the user is the _id, we will need to check if password from associated user in the DB matches the one provided in the form
 
-            const account = await accountsCollection.findOne({ validEmail })
+            const account = await accountsCollection.findOne({ _id: validEmail });
+
+            console.log(account);
 
             //feedback if account doesn't exist
 
