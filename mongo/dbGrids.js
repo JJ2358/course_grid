@@ -2,9 +2,9 @@ db.accounts.drop();
 
 db.accounts.insert([
     {
-        username: "exampleUser",
-        password: "1",
-        email: "example@example.com",
-        createdAt: new Date()
+        _id: 'luqanuhos@mailinator.com',
+        firstName: 'Rooney',
+        lastName: 'Mcleod',
+        password: 'hi'
     }
 ]);
