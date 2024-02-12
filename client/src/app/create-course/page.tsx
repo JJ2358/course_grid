@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import useAuthStatus from '../hooks/useAuthStatus'; 
+
 
 
 const CreateCoursePage: React.FC = () => {
-    const { isAuthenticated } = useAuthStatus();
+    
   
     const [courseCode, setCourseCode] = useState('');
     const [courseName, setCourseName] = useState('');

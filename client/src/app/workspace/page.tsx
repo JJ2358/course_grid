@@ -2,14 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import useAuthStatus from '../hooks/useAuthStatus'; 
+
 
 const WorkspacePage: React.FC = () => {
-  const { isAuthenticated, isLoading } = useAuthStatus();
+  // const { isAuthenticated, isLoading } = useAuthStatus();
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -21,12 +21,10 @@ const WorkspacePage: React.FC = () => {
       <main className="p-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-gray-800">Your Workspace</h1>
-          {isAuthenticated && (
-            <Link href="/create-course" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        </div>
+        <Link href="/create-course" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 + Add Course
             </Link>
-          )}
-        </div>
 
         {/* Condition to show if no courses are available */}
         <div className="text-center py-10">
