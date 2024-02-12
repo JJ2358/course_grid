@@ -24,16 +24,16 @@ const WorkspacePage: React.FC = () => {
         </div>
         <Link href="/create-course" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 + Add Course
-            </Link>
+        </Link>
 
-        {/* Condition to show if no courses are available */}
+        
         <div className="text-center py-10">
           <p className="text-gray-600 mb-4">Looks like you have no courses yet.</p>
-          <Link href="/create-course" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          {/* <Link href="/create-course" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Create Your First Course
-          </Link>
+          </Link> */}
         </div>
-        {/* Placeholder for courses listing */}
+        
       </main>
     </div>
   );
