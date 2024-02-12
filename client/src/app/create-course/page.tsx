@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import useAuthStatus from '../hooks/useAuthStatus'; // Make sure the path is correct
+import useAuthStatus from '../hooks/useAuthStatus'; 
 
 
 const CreateCoursePage: React.FC = () => {
@@ -23,7 +23,7 @@ const CreateCoursePage: React.FC = () => {
     <div className="min-h-screen bg-gray-100 p-8">
       <nav className="flex justify-between items-center mb-6">
         <Link href="/home" className="text-2xl font-bold">Logo</Link>
-        <Link href="/api/logout" className="text-sm font-semibold text-gray-700 hover:text-gray-900">Log Out</Link>
+        <Link href="/" className="text-sm font-semibold text-gray-700 hover:text-gray-900">Log Out</Link>
       </nav>
 
       <div className="max-w-lg mx-auto bg-white p-6 rounded shadow">

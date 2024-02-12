@@ -15,7 +15,7 @@ const WorkspacePage: React.FC = () => {
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-white px-8 py-4 shadow-md flex justify-between items-center">
         <Link href="/home">Logo</Link>
-        <Link href="/api/logout">Log Out</Link>
+        <Link href="/">Log Out</Link>
       </nav>
 
       <main className="p-8">

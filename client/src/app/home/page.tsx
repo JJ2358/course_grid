@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
                         <>
                             <Link href="/workspace">Workspace</Link>
                             
-                            <Link href="/api/logout">Log Out</Link>
+                            <Link href="/">Log Out</Link>
                         </>
                     ) : (
                         <Link href="/login">Login</Link>
