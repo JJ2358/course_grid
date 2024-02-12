@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
                     {isAuthenticated ? (
                         <>
                             <Link href="/workspace">Workspace</Link>
-                            <Link href="/settings">Settings</Link>
+                            
                             <Link href="/api/logout">Log Out</Link>
                         </>
                     ) : (

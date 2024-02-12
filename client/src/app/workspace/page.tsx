@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import useAuthStatus from '../hooks/useAuthStatus'; // Ensure the path is correct for your project structure
+import useAuthStatus from '../hooks/useAuthStatus'; 
 
 const WorkspacePage: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuthStatus();
